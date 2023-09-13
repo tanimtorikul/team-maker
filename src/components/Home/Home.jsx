@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 const Home = () => {
   const [allActors, setAllActors] = useState([]);
   const [selectedActors, setSelectedActors] = useState([]);
+  const [remaining, setRemaining] = useState(0);
+  const [totalCost, setTotalCost] = useState(0);
 
   useEffect(() => {
     fetch("./data.json")
@@ -16,7 +18,7 @@ const Home = () => {
   const handleSelectActor = (actor) => {
     const isExist = selectedActors.find((item) => item.id == actor.id);
     // console.log(isExist);
-
+    let count = actor.salary;
     if (isExist) {
       return Swal.fire({
         icon: "warning",
@@ -24,6 +26,22 @@ const Home = () => {
         text: "This actor is already selected!",
       });
     } else {
+      selectedActors.forEach((item) => {
+        count += item.salary;
+      });
+      const totalRemaining = 30000 - count;
+      setTotalCost(count);
+      if (count > 30000) {
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "You have out of your budget!",
+        });
+      }
+
+      setRemaining(totalRemaining);
+      // console.log(remaining);
+
       setSelectedActors([...selectedActors, actor]);
     }
   };
@@ -68,7 +86,11 @@ const Home = () => {
           ))}
         </div>
         <div className="w-1/4">
-          <Cart selectedActors={selectedActors}></Cart>
+          <Cart
+            selectedActors={selectedActors}
+            remaining={remaining}
+            totalCost={totalCost}
+          ></Cart>
         </div>
       </div>
     </div>

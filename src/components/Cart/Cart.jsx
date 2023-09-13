@@ -1,11 +1,21 @@
 import React from "react";
 
-const Cart = ({ selectedActors }) => {
+const Cart = ({ selectedActors, remaining, totalCost }) => {
   return (
     <div className="bg-gray-400 p-4 rounded-lg">
       <h1 className="text-2xl text-white mb-4">
-        Selected Actors:{selectedActors.length}
+        Selected Actors: {selectedActors.length}
       </h1>
+      <h1 className="text-2xl text-white mb-4">
+        Total Budget: 30000 $
+      </h1>
+      <h1 className="text-xl text-white mb-4">
+        Remaining Balance: {remaining} $
+      </h1>
+      <h1 className="text-xl text-white mb-4">
+        Total Cost: {totalCost} $
+      </h1>
+
       <div className="grid gap-4">
         {selectedActors.map((actor) => (
           <div
