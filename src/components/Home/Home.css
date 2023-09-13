@@ -1,7 +1,7 @@
 body {
   font-family: "Montserrat", sans-serif;
   background: url("https://i.ibb.co/JB1y0X5/4690.jpg"),
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
   background-blend-mode: overlay;
   background-repeat: no-repeat;
   background-size: cover;

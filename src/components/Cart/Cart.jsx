@@ -1,5 +1,3 @@
-import React from "react";
-
 const Cart = ({
   selectedActors,
   remaining,
@@ -9,7 +7,7 @@ const Cart = ({
 }) => {
   return (
     <div className="bg-green-900 p-4 rounded-lg">
-      <h1 className="md:text-2xl text-white mb-4">
+      <h1 className="text-2xl text-white mb-4">
         Selected Actors: {selectedActors.length}
       </h1>
       <h1 className="text-2xl text-white mb-4">Total Budget: {budget} $</h1>

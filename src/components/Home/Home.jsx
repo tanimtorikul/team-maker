@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Cart from "../Cart/Cart";
 import Swal from "sweetalert2";
+import SelectBtn from "../SelectBtn/SelectBtn";
 
 const Home = () => {
   const [allActors, setAllActors] = useState([]);
@@ -9,6 +10,7 @@ const Home = () => {
   const [remaining, setRemaining] = useState(30000);
   const [totalCost, setTotalCost] = useState(0);
   const [budget, setBudget] = useState(30000);
+  
 
   // const budget = 30000;
 
@@ -26,11 +28,14 @@ const Home = () => {
       return Swal.fire({
         icon: "warning",
         title: "Oops...",
+        title: "Oops wrong info",
         text: "This actor is already selected!",
       });
     } else {
+      
       selectedActors.forEach((item) => {
         count += item.salary;
+        
       });
       const totalRemaining = budget - count;
       setTotalCost(count);
@@ -40,6 +45,7 @@ const Home = () => {
           title: "Oops...",
           text: "You have out of your budget!",
         });
+        
       }
 
       setRemaining(totalRemaining);
@@ -98,12 +104,8 @@ const Home = () => {
                   {actor.role}
                 </p>
               </div>
-              <button
-                onClick={() => handleSelectActor(actor)}
-                className="mx-auto bg-green-500 text-white px-6 py-2 rounded-lg"
-              >
-                Select
-              </button>
+              <SelectBtn actor={actor} handleSelectActor={handleSelectActor}></SelectBtn>
+            
             </div>
           ))}
         </div>
