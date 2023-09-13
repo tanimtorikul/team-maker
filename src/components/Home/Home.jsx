@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Cart from "../Cart/Cart";
+import Swal from "sweetalert2";
 
 const Home = () => {
   const [allActors, setAllActors] = useState([]);
@@ -16,9 +17,15 @@ const Home = () => {
     const isExist = selectedActors.find((item) => item.id == actor.id);
     // console.log(isExist);
 
-    isExist
-      ? alert("You have already selected")
-      : setSelectedActors([...selectedActors, actor]);
+    if (isExist) {
+      return Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "This actor is already selected!",
+      });
+    } else {
+      setSelectedActors([...selectedActors, actor]);
+    }
   };
   // console.log(selectedActors);
   return (
