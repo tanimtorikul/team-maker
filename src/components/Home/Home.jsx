@@ -6,8 +6,11 @@ import Swal from "sweetalert2";
 const Home = () => {
   const [allActors, setAllActors] = useState([]);
   const [selectedActors, setSelectedActors] = useState([]);
-  const [remaining, setRemaining] = useState(0);
+  const [remaining, setRemaining] = useState(30000);
   const [totalCost, setTotalCost] = useState(0);
+  const [budget, setBudget] = useState(30000);
+
+  // const budget = 30000;
 
   useEffect(() => {
     fetch("./data.json")
@@ -16,7 +19,7 @@ const Home = () => {
   }, []);
 
   const handleSelectActor = (actor) => {
-    const isExist = selectedActors.find((item) => item.id == actor.id);
+    const isExist = selectedActors.find((item) => item.id === actor.id);
     // console.log(isExist);
     let count = actor.salary;
     if (isExist) {
@@ -29,9 +32,9 @@ const Home = () => {
       selectedActors.forEach((item) => {
         count += item.salary;
       });
-      const totalRemaining = 30000 - count;
+      const totalRemaining = budget - count;
       setTotalCost(count);
-      if (count > 30000) {
+      if (count > budget) {
         return Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -46,6 +49,25 @@ const Home = () => {
     }
   };
   // console.log(selectedActors);
+
+  // remove actor function
+  const handleRemoveActor = (actorId) => {
+    const removeSelectedActors = selectedActors.filter(
+      (actor) => actor.id != actorId
+    );
+    setSelectedActors(removeSelectedActors);
+
+    const newTotalCost = removeSelectedActors.reduce(
+      (total, actor) => total + actor.salary,
+      0
+    );
+
+    const newRemaining = budget - newTotalCost;
+
+    setSelectedActors(removeSelectedActors);
+    setTotalCost(newTotalCost);
+    setRemaining(newRemaining);
+  };
   return (
     <div>
       <div className="home-container flex">
@@ -87,9 +109,11 @@ const Home = () => {
         </div>
         <div className="w-1/4">
           <Cart
+            budget={budget}
             selectedActors={selectedActors}
             remaining={remaining}
             totalCost={totalCost}
+            handleRemoveActor={handleRemoveActor}
           ></Cart>
         </div>
       </div>
