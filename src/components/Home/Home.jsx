@@ -70,12 +70,12 @@ const Home = () => {
   };
   return (
     <div>
-      <div className="home-container flex">
-        <div className="w-3/4 flex flex-wrap gap-10">
+      <div className="home-container flex flex-col md:flex-row max-w-7xl mx-auto px-4 md:px-0 text-center gap-4">
+        <div className="md:w-3/4 flex flex-wrap  md:gap-10 gap-4 order-2 lg:order-1">
           {allActors.map((actor) => (
             <div
               key={actor.id}
-              className="w-96 bg-red-100 rounded-lg shadow-lg p-6"
+              className="md:w-96 w-full bg-gray-200	rounded-lg shadow-lg p-6"
             >
               <div className="flex justify-center mb-4">
                 <img
@@ -107,7 +107,7 @@ const Home = () => {
             </div>
           ))}
         </div>
-        <div className="w-1/4">
+        <div className="md:w-1/4 order-1 lg:order-2">
           <Cart
             budget={budget}
             selectedActors={selectedActors}

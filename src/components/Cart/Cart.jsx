@@ -1,20 +1,22 @@
 import React from "react";
 
-const Cart = ({ selectedActors, remaining, totalCost, budget, handleRemoveActor }) => {
+const Cart = ({
+  selectedActors,
+  remaining,
+  totalCost,
+  budget,
+  handleRemoveActor,
+}) => {
   return (
-    <div className="bg-gray-400 p-4 rounded-lg">
-      <h1 className="text-2xl text-white mb-4">
+    <div className="bg-green-900 p-4 rounded-lg">
+      <h1 className="md:text-2xl text-white mb-4">
         Selected Actors: {selectedActors.length}
       </h1>
-      <h1 className="text-2xl text-white mb-4">
-        Total Budget: {budget} $
-      </h1>
+      <h1 className="text-2xl text-white mb-4">Total Budget: {budget} $</h1>
       <h1 className="text-xl text-white mb-4">
         Remaining Balance: {remaining} $
       </h1>
-      <h1 className="text-xl text-white mb-4">
-        Total Cost: {totalCost} $
-      </h1>
+      <h1 className="text-xl text-white mb-4">Total Cost: {totalCost} $</h1>
 
       <div className="grid gap-4">
         {selectedActors.map((actor) => (
@@ -30,7 +32,10 @@ const Cart = ({ selectedActors, remaining, totalCost, budget, handleRemoveActor 
               />
               <h2 className="text-white text-lg">{actor.name}</h2>
             </div>
-            <button onClick={()=>handleRemoveActor(actor.id)} className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-700">
+            <button
+              onClick={() => handleRemoveActor(actor.id)}
+              className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-700"
+            >
               Remove
             </button>
           </div>
