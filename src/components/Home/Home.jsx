@@ -13,9 +13,14 @@ const Home = () => {
   }, []);
 
   const handleSelectActor = (actor) => {
-    setSelectedActors([...selectedActors, actor]);
+    const isExist = selectedActors.find((item) => item.id == actor.id);
+    // console.log(isExist);
+
+    isExist
+      ? alert("You have already selected")
+      : setSelectedActors([...selectedActors, actor]);
   };
-  console.log(selectedActors);
+  // console.log(selectedActors);
   return (
     <div>
       <div className="home-container flex">
